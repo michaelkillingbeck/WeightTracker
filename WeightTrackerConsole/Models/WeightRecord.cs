@@ -4,21 +4,21 @@ namespace WeightTrackerConsole
     using System;
     
     public class WeightRecord : TableEntity
-    {        
+    {
         public WeightRecord()
-        {
+        {    
         }
 
         public WeightRecord(DateTime recordDate, Decimal recordedWeight)
         {
             RecordDate = recordDate;
-            RecordedWeight = recordedWeight;
+            RecordedWeight = String.Format("{0:F1}", recordedWeight);
 
             PartitionKey = "weightrecord";
-            RowKey = $"{recordDate.Year}{recordDate.Month.ToString("D2")}{recordDate.Day.ToString("D2")}";
+            RowKey = $"{recordDate.Day.ToString("D2")}{recordDate.Month.ToString("D2")}{recordDate.Year}";
         }
 
         public DateTime RecordDate {get;set;}
-        public Decimal RecordedWeight {get;set;}
+        public String RecordedWeight {get;set;}
     }
 }

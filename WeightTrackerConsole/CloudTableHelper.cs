@@ -27,6 +27,23 @@ namespace WeightTrackerConsole
             return table;
         }
 
+        public async Task<T> GetEntity<T>(CloudTable table, String partitionKey, String rowKey) where T : TableEntity
+        {
+            try
+            {
+                TableOperation operation = TableOperation.Retrieve<WeightRecord>(partitionKey, rowKey);
+                TableResult result = await table.ExecuteAsync(operation);
+                T resultEntity = result.Result as T;
+
+                return resultEntity;
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Failure performing Retrieve operation.");
+                throw;
+            }
+        }
+
         public async Task<T> InsertOrMergeEntityAsync<T>(CloudTable table, T entity) where T : TableEntity
         {
             if(entity == null)
@@ -45,7 +62,7 @@ namespace WeightTrackerConsole
             }
             catch(Exception)
             {
-                System.Console.WriteLine("Failure performing Insert/Merge operation.");
+                Console.WriteLine("Failure performing Insert/Merge operation.");
                 throw;
             }
         }
