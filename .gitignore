@@ -1,0 +1,5 @@
+.vs/*
+WeightTrackerConsole/obj/*
+WeightTrackerConsole/bin/*
+WeightTrackerConsole/.vs/*
+.vscode/tasks.json
